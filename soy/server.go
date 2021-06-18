@@ -1,8 +1,7 @@
 package Server
 
 import (
-	"./lib/Global"
-	"./lib/Service"
+	"github.com/soy-oslab/soy-log-collector"
 	"github.com/smallnest/rpcx/server"
 )
 

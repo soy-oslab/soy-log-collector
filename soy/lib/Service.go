@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 	"flag"
-	"github.com/soyoslab/soy_log_collector/lib/*"
+	lib "github.com/soyoslab/soy_log_collector/lib"
 	"github.com/smallnest/rpcx/server"
 )
 
 func rangeMapping(arg int)  int {
-	return math.Round(arg * 255/ Global.RingSize)
+	return math.Round(arg * 255/ lib.Global.RingSize)
 }
 
 type Reply struct {
@@ -19,7 +19,7 @@ type Reply struct {
 type ColdPort int
 
 func (t *ColdPort) Push(ctx context.Context, args string, reply *Reply) error {
-	reply.Rate = rangeMapping(Global.ColdRing.Len())
+	reply.Rate = rangeMapping(lib.Global.ColdRing.Len())
 	if reply.Rate > 255 {
 		return -1
 	}
@@ -29,7 +29,7 @@ func (t *ColdPort) Push(ctx context.Context, args string, reply *Reply) error {
 type HotPort int
 
 func (t *HotPort) Push(ctx context.Context, args string, reply *Reply) error {
-	reply.Rate = rangeMapping(Global.HotRing.Len())
+	reply.Rate = rangeMapping(lib.Global.HotRing.Len())
 	if reply.Rate > 255 {
 		return -1
 	}

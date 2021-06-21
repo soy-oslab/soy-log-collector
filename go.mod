@@ -1,3 +1,3 @@
-module github.com/soyoslab/soy_log_collector
+module github.com/soy-oslab/soy-log-collector
 
 go 1.16

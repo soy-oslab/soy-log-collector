@@ -1,7 +1,7 @@
 package Server
 
 import (
-    "github.com/soyoslab/soy_log_collector/soy"
+    "github.com/soyoslab/soy_log_collector/soy/lib"
 	"github.com/smallnest/rpcx/server"
 )
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"flag"
-	"github.com/soyoslab/soy_log_collector/lib/"
+	"github.com/soyoslab/soy_log_collector/lib/*"
 	"github.com/smallnest/rpcx/server"
 )
 

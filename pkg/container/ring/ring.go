@@ -12,18 +12,10 @@ type Ring struct {
 	capacity int
 }
 
-// DefaultSize is default Ring size
-// Is set with 10
-var DefaultSize int
-
-func init() {
-	DefaultSize = 10
-}
-
 // New returns Ring conatiner with capacity
 // Default capacity is 10
 func New(capacity ...int) *Ring {
-	size := DefaultSize
+	size := 10
 	if len(capacity) > 0 {
 		size = capacity[0]
 	}

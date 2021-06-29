@@ -12,7 +12,7 @@ type Ring struct {
 	capacity int
 }
 
-// New returns Ring conatiner with capacity
+// New return Ring conatiner with capacity
 // Default capacity is 10
 func New(capacity ...int) *Ring {
 	size := 10
@@ -23,7 +23,7 @@ func New(capacity ...int) *Ring {
 	return &ring
 }
 
-// Push returns error if elements exceed capacity
+// Push return error if elements exceed capacity
 // Push args into Ring
 func (t *Ring) Push(args interface{}) error {
 	if t.capacity <= t.ring.Length() {
@@ -33,11 +33,16 @@ func (t *Ring) Push(args interface{}) error {
 	return nil
 }
 
-// Pop returns interfaces, error
+// Pop return interfaces, error
 // If there are no elements in Ring, return error
 func (t *Ring) Pop() (interface{}, error) {
 	if t.ring.Length() == 0 {
 		return 0, errors.New("Ring is empty!")
 	}
 	return t.ring.Pop(), nil
+}
+
+// Size return number of elements
+func (t *Ring) Size() int {
+	return t.ring.Length()
 }

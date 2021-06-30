@@ -57,7 +57,7 @@ func (t *Server) Push(db string, key string, data string) {
 
 	if _, ok := t.dblist[db]; !ok {
 		t.Push("root", db, strconv.Itoa(len(t.dblist)))
-		t.dblist[key] = t._NewClient(len(t.dblist))
+		t.dblist[db] = t._NewClient(len(t.dblist))
 	}
 
 	err := t.dblist[db].Set(ctx, key, data, 0).Err()

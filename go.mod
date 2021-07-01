@@ -7,5 +7,6 @@ require (
 	github.com/mitchellh/mapstructure v1.4.1
 	github.com/sheerun/queue v1.0.1
 	github.com/smallnest/rpcx v1.6.4
+	github.com/soyoslab/soy_log_generator v0.0.0-20210630053401-aca16aa58e8f
 	google.golang.org/grpc/examples v0.0.0-20210629184516-b3f274c2baba // indirect
 )

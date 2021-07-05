@@ -22,7 +22,7 @@ func (t *HotPort) Push(ctx context.Context, args *LogMessage, reply *Reply) erro
 		return errors.New("HotPort is full!")
 	}
 	log := CopyLogMessage(args)
-	global.HotRing.Push(log)
+	global.HotRing.Push(&log)
 	reply.Rate = util.RangeMapping(global.HotRing.Size())
 	return nil
 }

@@ -11,16 +11,20 @@ import (
 	daemon "github.com/soyoslab/soy_log_explorer/pkg/deamon"
 )
 
-var addr = flag.String("addr", os.Getenv("RPCSERVER"), "server address")
+var rpcserver = os.Getenv("RPCSERVER")
+var addr = flag.String("addr", rpcserver, "server address")
 
 // Server run rpcx server
 func Server() {
+	go daemon.Listen(global.HotRing, bg.HotPortHandler, 1)
+	go daemon.Listen(global.ColdRing, bg.ColdPortHandler, 2)
+
 	s := server.NewServer()
-	err := s.Register(new(rpc.HotPort), "")
+	err := s.RegisterName("HotPort", new(rpc.HotPort), "")
 	if err != nil {
 		return
 	}
-	err = s.Register(new(rpc.ColdPort), "")
+	err = s.RegisterName("ColdPort", new(rpc.ColdPort), "")
 	if err != nil {
 		return
 	}
@@ -28,7 +32,4 @@ func Server() {
 	if err != nil {
 		return
 	}
-
-	go daemon.Listen(global.HotRing, bg.HotPortHandler, 1)
-	go daemon.Listen(global.ColdRing, bg.ColdPortHandler, 2)
 }

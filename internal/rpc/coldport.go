@@ -22,7 +22,7 @@ func (t *ColdPort) Push(ctx context.Context, args *LogMessage, reply *Reply) err
 		return errors.New("ColdPort is full!")
 	}
 	log := CopyLogMessage(args)
-	global.ColdRing.Push(log)
+	global.ColdRing.Push(&log)
 	reply.Rate = util.RangeMapping(global.ColdRing.Size())
 	return nil
 }

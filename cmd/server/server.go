@@ -7,7 +7,7 @@ import (
 	"github.com/smallnest/rpcx/server"
 	bg "github.com/soyoslab/soy_log_collector/internal/background"
 	"github.com/soyoslab/soy_log_collector/internal/global"
-	"github.com/soyoslab/soy_log_collector/internal/rpc"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 	daemon "github.com/soyoslab/soy_log_explorer/pkg/deamon"
 )
 

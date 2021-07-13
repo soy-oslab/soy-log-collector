@@ -1,16 +1,16 @@
 package ring
 
 import (
-	"fmt"
+	"log"
 	"testing"
 )
 
 func TestNew(t *testing.T) {
 	ring := New()
-	fmt.Println(ring.capacity)
+	log.Println(ring.capacity)
 
 	ring = New(20)
-	fmt.Println(ring.capacity)
+	log.Println(ring.capacity)
 }
 
 func TestPush(t *testing.T) {
@@ -28,7 +28,7 @@ func TestPush(t *testing.T) {
 	err = ring.Push(1)
 
 	if err == nil {
-		t.Errorf("Can't Push!")
+		t.Errorf("can't push!")
 	}
 }
 
@@ -49,28 +49,21 @@ func TestPop(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		} else {
-			fmt.Println(v)
+			log.Println(v)
 		}
 	}
 
 	_, err = ring.Pop()
 	if err == nil {
-		t.Errorf("Must be empty!")
+		t.Errorf("must be empty!")
 	}
 }
 
 func TestSize(t *testing.T) {
-	var err error
-
 	ring := New()
 
-	for i := 0; i < 10; i++ {
-		err = ring.Push(i)
-		if err != nil {
-			t.Error(err)
-		}
-
-		fmt.Println(ring.Size())
-	}
-
+	ring.Push(1)
+	log.Println(ring.Size())
+	ring.Push(2)
+	log.Println(ring.Size())
 }

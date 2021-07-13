@@ -27,7 +27,7 @@ func New(capacity ...int) *Ring {
 // Push args into Ring
 func (t *Ring) Push(args interface{}) error {
 	if t.capacity <= t.ring.Length() {
-		return errors.New("Ring capacity is full!")
+		return errors.New("ring capacity is full")
 	}
 	t.ring.Append(args)
 	return nil
@@ -37,7 +37,7 @@ func (t *Ring) Push(args interface{}) error {
 // If there are no elements in Ring, return error
 func (t *Ring) Pop() (interface{}, error) {
 	if t.ring.Length() == 0 {
-		return 0, errors.New("Ring is empty!")
+		return 0, errors.New("ring is empty")
 	}
 	return t.ring.Pop(), nil
 }

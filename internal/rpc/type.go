@@ -1,12 +1,16 @@
 package rpc
 
+import (
+	"time"
+)
+
 // LogInfo is part of LogMessage.
 // Consist of timestamp, filename, length.
 // timestamp is the time log created.
 // filename is the name of log file.
 // length is the size(bytes) per log message.
 type LogInfo struct {
-	Timestamp int64
+	Timestamp time.Time
 	Filename  string
 	Length    uint64
 }

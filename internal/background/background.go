@@ -1,11 +1,18 @@
 package background
 
 import (
+	"context"
+
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
+
+type esdocs struct {
+	Index string
+	Docs  string
+}
 
 // HotPortHandler is processing unit with HotRing.
 // Running for goroutine with daemon.
@@ -39,6 +46,21 @@ func HotPortHandler(args ...interface{}) {
 			panic(err)
 		}
 		idx += length
+		sendMessage(key, log, true)
+	}
+
+}
+
+func sendMessage(idx string, data string, hotcold bool) {
+	var docs esdocs
+	var reply string
+
+	docs.Index = idx
+	docs.Docs = data
+	if hotcold {
+		global.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
+	} else {
+		global.SoyLogExplorer.Call(context.Background(), "ColdPush", &docs, &reply)
 	}
 }
 

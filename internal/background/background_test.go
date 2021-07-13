@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/soyoslab/soy_log_collector/internal/global"
-	"github.com/soyoslab/soy_log_collector/internal/rpc"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
 func TestHotPortHandler(t *testing.T) {

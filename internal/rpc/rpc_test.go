@@ -6,16 +6,17 @@ import (
 	"time"
 
 	"github.com/soyoslab/soy_log_collector/internal/global"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
 func TestHotPush(t *testing.T) {
 	ctx := context.Background()
 
 	var hotport HotPort
-	var logmsg LogMessage
-	var reply Reply
+	var logmsg rpc.LogMessage
+	var reply rpc.Reply
 
-	logmsg.Info = make([]LogInfo, 1)
+	logmsg.Info = make([]rpc.LogInfo, 1)
 	logmsg.Info[0].Timestamp = time.Now().UnixNano()
 	logmsg.Info[0].Filename = "Hot Push Test"
 	logmsg.Info[0].Length = 5
@@ -32,11 +33,11 @@ func TestColdPush(t *testing.T) {
 	ctx := context.Background()
 
 	var coldport ColdPort
-	var logmsg LogMessage
-	var reply Reply
+	var logmsg rpc.LogMessage
+	var reply rpc.Reply
 	var err error
 
-	logmsg.Info = make([]LogInfo, 1)
+	logmsg.Info = make([]rpc.LogInfo, 1)
 	logmsg.Info[0].Timestamp = time.Now().UnixNano()
 	logmsg.Info[0].Filename = "Hot Push Test"
 	logmsg.Info[0].Length = 5

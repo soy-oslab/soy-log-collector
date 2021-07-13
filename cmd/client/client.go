@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/smallnest/rpcx/client"
-	"github.com/soyoslab/soy_log_collector/internal/rpc"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
 var rpcserver = os.Getenv("RPCSERVER")

@@ -6,6 +6,7 @@ import (
 
 	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/internal/util"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
 // ColdPort is rpc procedure type.
@@ -16,7 +17,7 @@ type ColdPort int
 // Return error when ColdPort is full.
 // Communicate with caller via reply.
 // Send current ColdPort utility with reply
-func (t *ColdPort) Push(ctx context.Context, args *LogMessage, reply *Reply) error {
+func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
 	if global.ColdRing.Size() >= global.DefaultRingSize {
 		reply.Rate = util.RangeMapping(global.ColdRing.Size())
 		return errors.New("ColdPort is full!")

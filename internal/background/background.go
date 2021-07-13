@@ -3,8 +3,8 @@ package background
 import (
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
-	"github.com/soyoslab/soy_log_collector/internal/rpc"
 	"github.com/soyoslab/soy_log_collector/internal/util"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
 // HotPortHandler is processing unit with HotRing.

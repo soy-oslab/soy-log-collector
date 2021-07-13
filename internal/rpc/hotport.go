@@ -6,6 +6,7 @@ import (
 
 	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/internal/util"
+	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
 // HotPort is rpc procedure type.
@@ -16,7 +17,7 @@ type HotPort int
 // Return error when HotPort is full.
 // Communicate with caller via reply.
 // Send current HotPort utility with reply
-func (t *HotPort) Push(ctx context.Context, args *LogMessage, reply *Reply) error {
+func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
 	if global.HotRing.Size() >= global.DefaultRingSize {
 		reply.Rate = util.RangeMapping(global.HotRing.Size())
 		return errors.New("HotPort is full!")

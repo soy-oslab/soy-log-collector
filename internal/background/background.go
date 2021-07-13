@@ -5,7 +5,7 @@ import (
 
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
-	"github.com/soyoslab/soy_log_collector/pkg/rpc"
+	"github.com/soyoslab/soy_log_collector/internal/rpc"
 )
 
 // HotPortHandler is processing unit with HotRing.
@@ -22,7 +22,7 @@ func HotPortHandler(args ...interface{}) {
 
 	for _, loginfo := range buf.Info {
 		length = int(loginfo.Length)
-		timestamp = time.Unix(0, loginfo.Timestamp)
+		timestamp = loginfo.Timestamp
 		filename = loginfo.Filename
 		log = string(buf.Buffer[idx : idx+length])
 		global.RedisServer.Push(filename, timestamp.String(), log)
@@ -43,7 +43,7 @@ func ColdPortHandler(args ...interface{}) {
 	buffer := global.Compressor.Decompress(buf.Buffer)
 	for _, loginfo := range buf.Info {
 		length = int(loginfo.Length)
-		timestamp = time.Unix(0, loginfo.Timestamp)
+		timestamp = loginfo.Timestamp
 		filename = loginfo.Filename
 		log = string(buffer[idx : idx+length])
 		global.RedisServer.Push(filename, timestamp.String(), log)

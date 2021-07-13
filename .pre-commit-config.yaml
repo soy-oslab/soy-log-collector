@@ -1,9 +1,8 @@
-repos:
 -   repo: https://github.com/jorisroovers/gitlint
-    rev: v0.15.1
+    rev: main
     hooks:
     -   id: gitlint
-- repo: git://github.com/soyoslab/pre-commit-golang
+- repo: git://github.com/dnephin/pre-commit-golang
   rev: master
   hooks:
     - id: go-fmt
@@ -14,6 +13,8 @@ repos:
       args: [-over=15]
     - id: validate-toml
     - id: no-go-testing
+    #- id: golangci-lint
+    #- id: go-critic
     - id: go-unit-tests
     - id: go-build
     - id: go-mod-tidy

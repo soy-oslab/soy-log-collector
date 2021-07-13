@@ -24,31 +24,7 @@ func HotPortHandler(args ...interface{}) {
 		panic(err)
 	}
 
-	var timestamp int64
-	var idx int
-	var length int
-	var log string
-	var filename, key, date, sec, nano string
-
-	idx = 0
-	for _, loginfo := range buf.Info {
-		length = int(loginfo.Length)
-		timestamp = loginfo.Timestamp
-		filename = loginfo.Filename
-		log = string(buf.Buffer[idx : idx+length])
-		date, sec, nano, err = util.TimeSlice(timestamp)
-		if err != nil {
-			panic(err)
-		}
-		key = filename + ":" + date + ":" + sec + ":" + nano
-		err = global.RedisServer.Push(key, log)
-		if err != nil {
-			panic(err)
-		}
-		idx += length
-		sendMessage(key, log, true)
-	}
-
+	handler(buf)
 }
 
 func sendMessage(idx string, data string, hotcold bool) {
@@ -70,33 +46,42 @@ func ColdPortHandler(args ...interface{}) {
 	var buf *rpc.LogMessage
 	decoder.Decode(args[0], &buf)
 
-	var timestamp int64
-	var idx int
-	var length int
-	var log string
-	var filename, key, date, sec, nano string
-
-	idx = 0
 	buffer, err := global.Compressor.Decompress(buf.Buffer)
 
 	if err != nil {
 		panic(err)
 	}
 
-	for _, loginfo := range buf.Info {
+	buf.Buffer = buffer
+
+	handler(buf)
+
+}
+
+func handler(arg *rpc.LogMessage) {
+	var timestamp int64
+	var idx int
+	var length int
+	var log string
+	var filename, key, date, sec, nano string
+	var err error
+
+	idx = 0
+	for _, loginfo := range arg.Info {
 		length = int(loginfo.Length)
 		timestamp = loginfo.Timestamp
 		filename = loginfo.Filename
+		log = string(arg.Buffer[idx : idx+length])
 		date, sec, nano, err = util.TimeSlice(timestamp)
 		if err != nil {
 			panic(err)
 		}
 		key = filename + ":" + date + ":" + sec + ":" + nano
-		log = string(buffer[idx : idx+length])
 		err = global.RedisServer.Push(key, log)
 		if err != nil {
 			panic(err)
 		}
 		idx += length
+		sendMessage(key, log, true)
 	}
 }

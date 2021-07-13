@@ -20,7 +20,7 @@ type ColdPort int
 func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
 	if global.ColdRing.Size() >= global.DefaultRingSize {
 		reply.Rate = util.RangeMapping(global.ColdRing.Size())
-		return errors.New("ColdPort is full!")
+		return errors.New("coldport is full")
 	}
 	log := CopyLogMessage(args)
 	global.ColdRing.Push(&log)

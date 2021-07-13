@@ -11,7 +11,11 @@ import (
 // Running for goroutine with daemon.
 func HotPortHandler(args ...interface{}) {
 	var buf *rpc.LogMessage
-	decoder.Decode(args[0], &buf)
+	err := decoder.Decode(args[0], &buf)
+
+	if err != nil {
+		panic(err)
+	}
 
 	var timestamp int64
 	var idx int
@@ -25,9 +29,15 @@ func HotPortHandler(args ...interface{}) {
 		timestamp = loginfo.Timestamp
 		filename = loginfo.Filename
 		log = string(buf.Buffer[idx : idx+length])
-		date, sec, nano = util.TimeSlice(timestamp)
+		date, sec, nano, err = util.TimeSlice(timestamp)
+		if err != nil {
+			panic(err)
+		}
 		key = filename + ":" + date + ":" + sec + ":" + nano
-		global.RedisServer.Push(key, log)
+		err = global.RedisServer.Push(key, log)
+		if err != nil {
+			panic(err)
+		}
 		idx += length
 	}
 }
@@ -48,17 +58,23 @@ func ColdPortHandler(args ...interface{}) {
 	buffer, err := global.Compressor.Decompress(buf.Buffer)
 
 	if err != nil {
-		panic("compress failed")
+		panic(err)
 	}
 
 	for _, loginfo := range buf.Info {
 		length = int(loginfo.Length)
 		timestamp = loginfo.Timestamp
 		filename = loginfo.Filename
-		date, sec, nano = util.TimeSlice(timestamp)
+		date, sec, nano, err = util.TimeSlice(timestamp)
+		if err != nil {
+			panic(err)
+		}
 		key = filename + ":" + date + ":" + sec + ":" + nano
 		log = string(buffer[idx : idx+length])
-		global.RedisServer.Push(key, log)
+		err = global.RedisServer.Push(key, log)
+		if err != nil {
+			panic(err)
+		}
 		idx += length
 	}
 }

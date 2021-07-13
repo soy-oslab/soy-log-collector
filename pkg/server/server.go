@@ -14,8 +14,8 @@ type Server struct {
 }
 
 // New return Server structure with initializing DBTable
-func New(ctx context.Context) Server {
-	s := Server{}
+func New(ctx context.Context) *Server {
+	s := &Server{}
 	s.db = s.newClient(0)
 	s.ctx = context.Background()
 
@@ -37,10 +37,14 @@ func (t *Server) newClient(dbnum int) redis.Client {
 // db select db want to insert {key, data}
 // key matching to data
 // data matching to key
-func (t *Server) Push(key string, data string) {
+func (t *Server) Push(key string, data string) error {
 	ctx := t.ctx
 	err := t.db.Set(ctx, key, data, 0).Err()
 	if err != nil {
-		panic(err)
+		return err
 	}
+
+	return nil
 }
+
+// Client Dealloc!!

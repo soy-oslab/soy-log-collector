@@ -19,7 +19,7 @@ var HotRing *ring.Ring
 var ColdRing *ring.Ring
 
 // RedisServer is used for rpc data server with Hot/Cold port.
-var RedisServer server.Server
+var RedisServer *server.Server
 
 // Compressor is for rpc.
 var Compressor compressor.Compressor

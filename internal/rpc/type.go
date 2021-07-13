@@ -27,3 +27,5 @@ type LogMessage struct {
 type Reply struct {
 	Rate uint8
 }
+
+// Move to pkg

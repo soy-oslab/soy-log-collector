@@ -39,11 +39,19 @@ func TestHotPush(t *testing.T) {
 	var reply rpc.Reply
 
 	logmsg := makeMsg(true)
-	err := hotport.Push(ctx, &logmsg, &reply)
 
-	if err != nil {
-		t.Error(err)
+	for i := 0; i < 10; i++ {
+		err := hotport.Push(ctx, &logmsg, &reply)
+		if err != nil {
+			t.Error(err)
+		}
 	}
+
+	err := hotport.Push(ctx, &logmsg, &reply)
+	if err == nil {
+		t.Errorf("hotport must be full")
+	}
+
 }
 
 func TestColdPush(t *testing.T) {
@@ -53,9 +61,16 @@ func TestColdPush(t *testing.T) {
 	var reply rpc.Reply
 
 	logmsg := makeMsg(false)
-	err := coldport.Push(ctx, &logmsg, &reply)
 
-	if err != nil {
-		t.Error(err)
+	for i := 0; i < 10; i++ {
+		err := coldport.Push(ctx, &logmsg, &reply)
+		if err != nil {
+			t.Error(err)
+		}
+	}
+
+	err := coldport.Push(ctx, &logmsg, &reply)
+	if err == nil {
+		t.Errorf("coldport must be full")
 	}
 }

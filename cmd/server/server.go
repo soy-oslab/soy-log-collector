@@ -8,9 +8,10 @@ import (
 	bg "github.com/soyoslab/soy_log_collector/internal/background"
 	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/internal/rpc"
-	daemon "github.com/soyoslab/soy_log_explorer/pkg/deamon"
+	daemon "github.com/soyoslab/soy_log_explorer/pkg/daemon"
 )
 
+// daemon polling time
 var rpcserver = os.Getenv("RPCSERVER")
 var addr = flag.String("addr", rpcserver, "server address")
 

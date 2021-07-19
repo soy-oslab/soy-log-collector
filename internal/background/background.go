@@ -1,18 +1,17 @@
 package background
 
 import (
+	"bytes"
 	"context"
+	"encoding/gob"
 
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
+	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
+	"github.com/soyoslab/soy_log_generator/pkg/compressor"
 )
-
-type esdocs struct {
-	Index string
-	Docs  string
-}
 
 // HotPortHandler is processing unit with HotRing.
 // Running for goroutine with daemon.
@@ -24,11 +23,24 @@ func HotPortHandler(args ...interface{}) {
 		panic(err)
 	}
 
-	handler(buf)
+	handler(buf, true)
+}
+
+func docsCompress(docs esdocs.ESdocs) ([]byte, error) {
+	var buf bytes.Buffer
+
+	enc := gob.NewEncoder(&buf)
+	err := enc.Encode(docs)
+	if err != nil {
+		return nil, err
+	}
+
+	c := &compressor.GzipComp{}
+	return c.Compress(buf.Bytes())
 }
 
 func sendMessage(idx string, data string, hotcold bool) {
-	var docs esdocs
+	var docs esdocs.ESdocs
 	var reply string
 
 	docs.Index = idx
@@ -36,7 +48,8 @@ func sendMessage(idx string, data string, hotcold bool) {
 	if hotcold {
 		global.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
 	} else {
-		global.SoyLogExplorer.Call(context.Background(), "ColdPush", &docs, &reply)
+		data, _ := docsCompress(docs)
+		global.SoyLogExplorer.Call(context.Background(), "ColdPush", &data, &reply)
 	}
 }
 
@@ -54,11 +67,19 @@ func ColdPortHandler(args ...interface{}) {
 
 	buf.Buffer = buffer
 
-	handler(buf)
-
+	handler(buf, false)
 }
 
-func handler(arg *rpc.LogMessage) {
+func mergeString(value []string) string {
+	merged := ""
+	for _, v := range value {
+		merged += v
+	}
+
+	return merged
+}
+
+func handler(arg *rpc.LogMessage, hotcold bool) {
 	var timestamp int64
 	var idx int
 	var length int
@@ -67,6 +88,10 @@ func handler(arg *rpc.LogMessage) {
 	var err error
 
 	idx = 0
+
+	var buf map[string][]string
+	var coldlog map[string][]string
+
 	for _, loginfo := range arg.Info {
 		length = int(loginfo.Length)
 		timestamp = loginfo.Timestamp
@@ -82,6 +107,18 @@ func handler(arg *rpc.LogMessage) {
 			panic(err)
 		}
 		idx += length
-		sendMessage(key, log, true)
+		if hotcold {
+			sendMessage(key, log, hotcold)
+		} else {
+			buf = Filter(log)
+			coldlog = MergeMap(buf, coldlog)
+		}
+	}
+
+	if !hotcold {
+		for key, value := range coldlog {
+			merged := mergeString(value)
+			sendMessage(key, merged, hotcold)
+		}
 	}
 }

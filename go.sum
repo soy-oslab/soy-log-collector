@@ -346,8 +346,10 @@ github.com/soheilhy/cmux v0.1.4/go.mod h1:IM3LyeVVIOuxMH7sFAkER9+bJ4dT7Ms6E4xg4k
 github.com/sourcegraph/annotate v0.0.0-20160123013949-f4cad6c6324d/go.mod h1:UdhH50NIW0fCiwBSr0co2m7BnFLdv4fQTgdqdJTHFeE=
 github.com/sourcegraph/syntaxhighlight v0.0.0-20170531221838-bd320f5d308e/go.mod h1:HuIsMU8RRBOtsCgI77wP899iHVBQpCmg4ErYMZB+2IA=
 github.com/soyoslab/soy_log_collector v0.0.0-20210629052559-44ad8e91e8ce/go.mod h1:tIVi9IKyVHC4jvwmlPBACVB8QYz/LSc4ZPHPaK5lSEY=
-github.com/soyoslab/soy_log_explorer v0.0.0-20210701105957-3207eefdad8e h1:H7nHAE0hMVRERPiI6Xk5bwLk4jIB3EWGcZBzqo1PurU=
+github.com/soyoslab/soy_log_collector v0.0.0-20210703071913-80f1e52e4c28/go.mod h1:dxRiMVXiei7w6ncCh3fXW/nciFAQAeYWB8VEi5A1X08=
 github.com/soyoslab/soy_log_explorer v0.0.0-20210701105957-3207eefdad8e/go.mod h1:SNcycmwzSfw5eMAlB5SzOKW+M9954WRnOq9BxZy1P6E=
+github.com/soyoslab/soy_log_explorer v0.0.0-20210713074820-ab2cf352133e h1:6dbDEjLqqL83DxaziY29aDDw05ZyfPy916eHuX4A6q0=
+github.com/soyoslab/soy_log_explorer v0.0.0-20210713074820-ab2cf352133e/go.mod h1:j4XdE+NIpC2gCeHO4MXaXaTTKeuEthvUgsBaFlDmGXU=
 github.com/soyoslab/soy_log_generator v0.0.0-20210630053401-aca16aa58e8f/go.mod h1:dKvCJC5k69OCOwJZFhhYx0oifdUHSVjBJjMOyUI/bK0=
 github.com/soyoslab/soy_log_generator v0.0.0-20210705022215-238467d68398 h1:dO3PWZX6kJvzH0Z3Zu0EFmAGxBnVbIO3v6t7uFtv0cI=
 github.com/soyoslab/soy_log_generator v0.0.0-20210705022215-238467d68398/go.mod h1:dKvCJC5k69OCOwJZFhhYx0oifdUHSVjBJjMOyUI/bK0=

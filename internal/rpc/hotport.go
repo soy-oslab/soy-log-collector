@@ -20,8 +20,9 @@ type HotPort int
 func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
 	if global.HotRing.Size() >= global.DefaultRingSize {
 		reply.Rate = util.RangeMapping(global.HotRing.Size())
-		return errors.New("cotport is full")
+		return errors.New("hotport is full")
 	}
+
 	log := CopyLogMessage(args)
 	global.HotRing.Push(&log)
 	reply.Rate = util.RangeMapping(global.HotRing.Size())

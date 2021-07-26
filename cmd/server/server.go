@@ -13,7 +13,7 @@ import (
 
 // daemon polling time
 var rpcserver = os.Getenv("RPCSERVER")
-var addr = flag.String("addr", rpcserver, "server address")
+var addr = flag.String("rpcaddr", rpcserver, "server address")
 
 // Server run rpcx server
 func Server() {

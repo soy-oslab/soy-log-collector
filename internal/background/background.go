@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/gob"
+	"strings"
 
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
@@ -39,13 +40,14 @@ func docsCompress(docs esdocs.ESdocs) ([]byte, error) {
 	return c.Compress(buf.Bytes())
 }
 
-func sendMessage(idx string, data string, hotcold bool) {
+// SendMessage send esdocs type data to soy_log_explorer
+func SendMessage(idx string, data string, isHot bool) {
 	var docs esdocs.ESdocs
 	var reply string
 
 	docs.Index = idx
 	docs.Docs = data
-	if hotcold {
+	if isHot {
 		global.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
 	} else {
 		data, _ := docsCompress(docs)
@@ -71,26 +73,34 @@ func ColdPortHandler(args ...interface{}) {
 }
 
 func mergeString(value []string) string {
-	merged := ""
+	merged := "{"
 	for _, v := range value {
-		merged += v
+		slices := strings.Split(v, ":")
+		log := slices[len(slices)-1]
+		timestamp := ""
+		for _, t := range slices {
+			timestamp += t
+		}
+		merged += "\""
+		merged += timestamp + "\":"
+		merged += log + "\","
 	}
+
+	merged = merged[:len(merged)-2] + "}"
 
 	return merged
 }
 
-func handler(arg *rpc.LogMessage, hotcold bool) {
-	var timestamp int64
+func handler(arg *rpc.LogMessage, isHot bool) {
 	var idx int
+	var err error
 	var length int
 	var log string
-	var filename, key, date, sec, nano string
-	var err error
+	var timestamp int64
+	var coldlog []string
+	var filename, key, date, sec, nano, buf string
 
 	idx = 0
-
-	var buf map[string][]string
-	var coldlog map[string][]string
 
 	for _, loginfo := range arg.Info {
 		length = int(loginfo.Length)
@@ -107,18 +117,16 @@ func handler(arg *rpc.LogMessage, hotcold bool) {
 			panic(err)
 		}
 		idx += length
-		if hotcold {
-			sendMessage(key, log, hotcold)
+		if isHot {
+			SendMessage("hot", log, isHot)
 		} else {
-			buf = Filter(log)
-			coldlog = MergeMap(buf, coldlog)
+			buf = Filter(key, log)
+			coldlog = append(coldlog, buf)
 		}
 	}
 
-	if !hotcold {
-		for key, value := range coldlog {
-			merged := mergeString(value)
-			sendMessage(key, merged, hotcold)
-		}
+	if !isHot {
+		merged := mergeString(coldlog)
+		SendMessage("cold", merged, isHot)
 	}
 }

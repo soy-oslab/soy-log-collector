@@ -1,0 +1,26 @@
+name: linux-build-test
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+defaults:
+  run:
+    shell: bash
+jobs:
+  source-archive-gen:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Grab source
+      uses: actions/checkout@v2
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+    - name: Build
+      run: go build -v ./...
+    - name: Test
+      run: go test -v ./...
+    - name: Send coverage
+      run: ash <(curl -Ls https://coverage.codacy.com/get.sh) report \
+    --force-coverage-parser go -r soy_log_collector

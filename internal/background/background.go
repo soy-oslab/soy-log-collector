@@ -4,10 +4,13 @@ import (
 	"bytes"
 	"context"
 	"encoding/gob"
+	"encoding/json"
+	"errors"
 	"strings"
 
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
+	irpc "github.com/soyoslab/soy_log_collector/internal/rpc"
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
@@ -41,18 +44,43 @@ func docsCompress(docs esdocs.ESdocs) ([]byte, error) {
 }
 
 // SendMessage send esdocs type data to soy_log_explorer
-func SendMessage(idx string, data string, isHot bool) {
+func SendMessage(idx string, data string, isHot bool) error {
 	var docs esdocs.ESdocs
 	var reply string
+	var err error
+	var compressed []byte
+	var connectionCount int
 
+	connectionCount = 0
 	docs.Index = idx
 	docs.Docs = data
-	if isHot {
-		global.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
-	} else {
-		data, _ := docsCompress(docs)
-		global.SoyLogExplorer.Call(context.Background(), "ColdPush", &data, &reply)
+	err = errors.New("full")
+
+	if !isHot {
+		compressed, _ = docsCompress(docs)
 	}
+
+SEND:
+	if err != nil {
+		if strings.Contains(err.Error(), "full") {
+			for err != nil {
+				if isHot {
+					err = irpc.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
+				} else {
+					err = irpc.SoyLogExplorer.Call(context.Background(), "ColdPush", &compressed, &reply)
+				}
+			}
+		} else {
+			if connectionCount > 10 {
+				return errors.New("connection fail")
+			}
+			irpc.SoyLogExplorer = irpc.CreateExplorerServer()
+			connectionCount++
+		}
+		goto SEND
+	}
+
+	return nil
 }
 
 // ColdPortHandler is processing unit with ColdRing.
@@ -66,48 +94,47 @@ func ColdPortHandler(args ...interface{}) {
 	if err != nil {
 		panic(err)
 	}
-
 	buf.Buffer = buffer
 
 	handler(buf, false)
 }
 
-func mergeString(value []string) string {
-	merged := "{"
-	for _, v := range value {
-		slices := strings.Split(v, ":")
-		log := slices[len(slices)-1]
-		timestamp := ""
-		for _, t := range slices {
-			timestamp += t
-		}
-		merged += "\""
-		merged += timestamp + "\":"
-		merged += log + "\","
-	}
+func makeJSON(timestamp string, filename string, log string, host string) map[string]string {
+	buf := make(map[string]string)
 
-	merged = merged[:len(merged)-2] + "}"
+	buf["@timestamp"] = timestamp
+	buf["@filename"] = filename
+	buf["log"] = log
+	buf["@host"] = host
 
-	return merged
+	return buf
 }
 
 func handler(arg *rpc.LogMessage, isHot bool) {
-	var idx int
-	var err error
-	var length int
-	var log string
-	var timestamp int64
-	var coldlog []string
-	var filename, key, date, sec, nano, buf string
+	var (
+		idx                            int
+		err                            error
+		length                         int
+		log                            string
+		timestamp                      int64
+		logarr                         []map[string]string
+		filename, key, date, sec, nano string
+		namespace                      string
+		host                           string
+	)
 
+	logarr = make([]map[string]string, 0)
+	ns := strings.Split(arg.Namespace, ":")
+	namespace = ns[0]
+	host = ns[1]
 	idx = 0
 
-	for _, loginfo := range arg.Info {
+	for i, loginfo := range arg.Info {
 		length = int(loginfo.Length)
 		timestamp = loginfo.Timestamp
-		filename = loginfo.Filename
+		filename = irpc.MapTable[arg.Namespace][arg.Files.Indexes[i]]
 		log = string(arg.Buffer[idx : idx+length])
-		date, sec, nano, err = util.TimeSlice(timestamp)
+		ts := util.TimeSlice(timestamp)
 		if err != nil {
 			panic(err)
 		}
@@ -118,15 +145,20 @@ func handler(arg *rpc.LogMessage, isHot bool) {
 		}
 		idx += length
 		if isHot {
-			SendMessage("hot", log, isHot)
+			logarr = logarr[:0]
+			logarr = append(logarr, makeJSON(ts, filename, log, host))
+			jsonfy, _ := json.Marshal(logarr)
+			SendMessage(namespace, string(jsonfy), isHot)
 		} else {
-			buf = Filter(key, log)
-			coldlog = append(coldlog, buf)
+			err := Filter(log)
+			if err != nil {
+				continue
+			}
+			logarr = append(logarr, makeJSON(ts, filename, log, host))
 		}
 	}
-
-	if !isHot {
-		merged := mergeString(coldlog)
-		SendMessage("cold", merged, isHot)
+	if !isHot && len(logarr) > 0 {
+		jsonfy, _ := json.Marshal(logarr)
+		SendMessage(namespace, string(jsonfy), isHot)
 	}
 }

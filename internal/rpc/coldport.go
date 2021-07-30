@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
@@ -18,12 +17,16 @@ type ColdPort int
 // Communicate with caller via reply.
 // Send current ColdPort utility with reply
 func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
-	if global.ColdRing.Size() >= global.DefaultRingSize {
-		reply.Rate = util.RangeMapping(global.ColdRing.Size())
+	if InitFlag == 0 {
+		reply.Rate = 0
+		return errors.New("init must be called first")
+	}
+	if ColdRing.Size() >= ColdRingSize {
+		reply.Rate = util.RangeMapping(ColdRing.Size(), ColdRingSize)
 		return errors.New("coldport is full")
 	}
 	log := CopyLogMessage(args)
-	global.ColdRing.Push(&log)
-	reply.Rate = util.RangeMapping(global.ColdRing.Size())
+	ColdRing.Push(&log)
+	reply.Rate = util.RangeMapping(ColdRing.Size(), ColdRingSize)
 	return nil
 }

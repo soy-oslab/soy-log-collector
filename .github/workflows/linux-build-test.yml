@@ -22,5 +22,4 @@ jobs:
     - name: Test
       run: go test -v ./...
     - name: Send coverage
-      run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
-    --force-coverage-parser go -r soy_log_collector
+      run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report --force-coverage-parser go -r soy_log_collector

@@ -7,6 +7,6 @@ require (
 	github.com/mitchellh/mapstructure v1.4.1
 	github.com/sheerun/queue v1.0.1
 	github.com/smallnest/rpcx v1.6.4
-	github.com/soyoslab/soy_log_explorer v0.0.0-20210713074820-ab2cf352133e
+	github.com/soyoslab/soy_log_explorer v0.0.0-20210729031516-8cc23a53ad84
 	github.com/soyoslab/soy_log_generator v0.0.0-20210705022215-238467d68398
 )

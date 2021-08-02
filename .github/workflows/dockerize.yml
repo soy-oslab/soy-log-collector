@@ -28,7 +28,8 @@ jobs:
     - name: Dockerize bin
       run: |
         docker build \
-          -t "${{ secrets.DOCKER_REGISTRY_ENDPOINT }}"/collector:latest \ 
-          -f scripts/Dockerfile /tmp/dockerize
+          -t "${{ secrets.DOCKER_REGISTRY_ENDPOINT }}"/collector:latest \
+          -f scripts/Dockerfile \
+          /tmp/dockerize
     - name: Push Docker image
       run: docker push "${{ secrets.DOCKER_REGISTRY_ENDPOINT }}"/collector

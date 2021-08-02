@@ -1,4 +1,3 @@
-  
 FROM golang:1.16
 
 COPY collector collector

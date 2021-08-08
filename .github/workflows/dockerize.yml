@@ -15,6 +15,11 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.16
+    - name: Install Redis-Server
+      run: |
+        sudo apt update
+        sudo apt install redis-server
+        sudo systemctl restart redis-server.service
     - name: Generate Full Source Archive
       run: |
         pip install git-archive-all

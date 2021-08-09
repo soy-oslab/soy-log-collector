@@ -62,6 +62,29 @@ func TestInitPush(t *testing.T) {
 	initport.Push(ctx, &logmsg, &reply)
 }
 
+func TestInitPushFail(t *testing.T) {
+	var logmsg rpc.LogMessage
+	var reply rpc.Reply
+	var initport Init
+	var table []string
+	ctx := context.Background()
+
+	logmsg.Namespace = "app1"
+	logmsg.Files.MapTable = table
+	initport.Push(ctx, &logmsg, &reply)
+}
+
+func TestCheckAvailable(t *testing.T) {
+	ctx := context.Background()
+
+	var hotport HotPort
+	var reply rpc.Reply
+
+	logmsg := makeMsg(true)
+	InitFlag = 0
+	hotport.Push(ctx, &logmsg, &reply)
+}
+
 func TestHotPush(t *testing.T) {
 	ctx := context.Background()
 

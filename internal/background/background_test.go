@@ -2,6 +2,7 @@ package background
 
 import (
 	"math/rand"
+	"os"
 	"strconv"
 	"testing"
 	"time"
@@ -57,4 +58,12 @@ func TestColdPortHandler(t *testing.T) {
 	logmsg := makeMsg(false)
 
 	ColdPortHandler(&logmsg)
+}
+
+func TestFilter(t *testing.T) {
+	setMapTable()
+	logmsg := makeMsg(false)
+	os.Rename("filter.json", "filter2.json")
+	ColdPortHandler(&logmsg)
+	os.Rename("filter2.json", "filter.json")
 }

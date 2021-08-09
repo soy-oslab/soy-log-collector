@@ -1,6 +1,8 @@
 package rpc
 
-import "errors"
+import (
+	"errors"
+)
 
 func checkAvailable(hotcold int) error {
 	err := checkInit()

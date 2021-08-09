@@ -1,6 +1,7 @@
 # soy-log-collector
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f4951281ac54cd2b75a5c23d1fb9cb5)](https://www.codacy.com/gh/soyoslab/soy_log_collector/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=soyoslab/soy_log_collector&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/7f4951281ac54cd2b75a5c23d1fb9cb5)](https://www.codacy.com/gh/soyoslab/soy_log_collector/dashboard?utm_source=github.com&utm_medium=referral&utm_content=soyoslab/soy_log_collector&utm_campaign=Badge_Coverage)
+[![dockerize](https://github.com/soyoslab/soy_log_collector/actions/workflows/dockerize.yml/badge.svg)](https://github.com/soyoslab/soy_log_collector/actions/workflows/dockerize.yml)
 
 ## Introduction
 

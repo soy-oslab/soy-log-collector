@@ -34,3 +34,6 @@ jobs:
       run: make codacy-coverage-push
       env:
         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        EXPLORERSERVER: ${{ secrets.EXPLORERSERVER }}
+        RPCSERVER: ${{ secrets.RPCSERVER }}
+        DBADDR: ${{ secrets.DBADDR }}

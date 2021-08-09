@@ -62,6 +62,7 @@ func TestColdPortHandler(t *testing.T) {
 
 func TestFilter(t *testing.T) {
 	setMapTable()
+	irpc.InitFlag = 0
 	logmsg := makeMsg(false)
 	os.Rename("filter.json", "filter2.json")
 	ColdPortHandler(&logmsg)

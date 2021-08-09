@@ -1,5 +1,7 @@
 # soy-log-collector
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5c099add2c146dba8b4d491374c2db5)](https://app.codacy.com/gh/soyoslab/soy_log_collector?utm_source=github.com&utm_medium=referral&utm_content=soyoslab/soy_log_collector&utm_campaign=Badge_Grade_Settings)
+
 ## Introduction
 
 This project sends the messages got from soy_log_generator to soy_log_explorer.

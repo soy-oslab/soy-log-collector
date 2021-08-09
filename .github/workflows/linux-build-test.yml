@@ -31,6 +31,6 @@ jobs:
         RPCSERVER: ${{ secrets.RPCSERVER }}
         DBADDR: ${{ secrets.DBADDR }}
     - name: Send coverage
-      run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report --force-coverage-parser go -r soy_log_collector
+      run: make codacy-coverage-push
       env:
         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}

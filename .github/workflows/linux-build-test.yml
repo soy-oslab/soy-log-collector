@@ -17,6 +17,11 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.16
+    - name: Set Env
+      env: |
+        EXPLORERSERVER: ${{ secrets.EXPLORERSERVER }}
+        RPCSERVER: ${{ secrets.RPCSERVER }}
+        DBADDR: ${{ secrets.DBADDR }}
     - name: Install Redis-server
       run: |
         sudo apt update

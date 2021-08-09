@@ -2,6 +2,20 @@ package rpc
 
 import "errors"
 
+func checkAvailable(hotcold int) error {
+	err := checkInit()
+	if err != nil {
+		return err
+	}
+
+	err = checkRingSize(hotcold)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func checkRingSize(hotcold int) error {
 	if hotcold == 1 {
 		if HotRing.Size() >= HotRingSize {

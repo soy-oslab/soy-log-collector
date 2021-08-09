@@ -17,13 +17,7 @@ type HotPort int
 // Communicate with caller via reply.
 // Send current HotPort utility with reply
 func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
-	err := checkInit()
-	if err != nil {
-		reply.Rate = 0
-		return err
-	}
-
-	err = checkRingSize(1)
+	err := checkAvailable(1)
 	if err != nil {
 		reply.Rate = util.RangeMapping(HotRing.Size(), HotRingSize)
 		return err

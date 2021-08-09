@@ -16,13 +16,7 @@ type ColdPort int
 // Communicate with caller via reply.
 // Send current ColdPort utility with reply
 func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
-	err := checkInit()
-	if err != nil {
-		reply.Rate = 0
-		return err
-	}
-
-	err = checkRingSize(0)
+	err := checkAvailable(0)
 	if err != nil {
 		reply.Rate = util.RangeMapping(ColdRing.Size(), ColdRingSize)
 		return err

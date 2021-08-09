@@ -1,0 +1,223 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BENCHTIME	Makefile	/^BENCHTIME=1s$/;"	m
+BENCHTIMEOUT	Makefile	/^BENCHTIMEOUT=10m$/;"	m
+BUILD_PATH	Makefile	/^BUILD_PATH=$(shell pwd)\/build$/;"	m
+ColdPort	internal/rpc/coldport.go	/^type ColdPort int$/;"	d
+ColdPort	internal/rpc/coldport.go	/^type ColdPort int$/;"	t
+ColdPortHandler	internal/background/background.go	/^func ColdPortHandler(args ...interface{}) {$/;"	d
+ColdPortHandler	internal/background/background.go	/^func ColdPortHandler(args ...interface{}) {$/;"	f
+ColdRing	internal/rpc/init.go	/^var ColdRing *ring.Ring$/;"	d
+ColdRing	internal/rpc/init.go	/^var ColdRing *ring.Ring$/;"	v
+ColdRingSize	internal/rpc/init.go	/^var ColdRingSize int$/;"	d
+ColdRingSize	internal/rpc/init.go	/^var ColdRingSize int$/;"	v
+Compressor	internal/global/global.go	/^var Compressor compressor.Compressor$/;"	d
+Compressor	internal/global/global.go	/^var Compressor compressor.Compressor$/;"	v
+CopyLogMessage	internal/rpc/copy.go	/^func CopyLogMessage(arg *rpc.LogMessage) rpc.LogMessage {$/;"	d
+CopyLogMessage	internal/rpc/copy.go	/^func CopyLogMessage(arg *rpc.LogMessage) rpc.LogMessage {$/;"	f
+CreateExplorerServer	internal/rpc/explorer_server.go	/^func CreateExplorerServer() client.XClient {$/;"	d
+CreateExplorerServer	internal/rpc/explorer_server.go	/^func CreateExplorerServer() client.XClient {$/;"	f
+ExplorerAddr	internal/rpc/init.go	/^var ExplorerAddr *string$/;"	d
+ExplorerAddr	internal/rpc/init.go	/^var ExplorerAddr *string$/;"	v
+ExplorerServer	internal/rpc/init.go	/^var ExplorerServer string$/;"	d
+ExplorerServer	internal/rpc/init.go	/^var ExplorerServer string$/;"	v
+Filter	internal/background/filter.go	/^func Filter(log string) error {$/;"	d
+Filter	internal/background/filter.go	/^func Filter(log string) error {$/;"	f
+GOBIN	Makefile	/^GOBIN=go$/;"	m
+GOBUILD	Makefile	/^GOBUILD=$(GOBIN) build$/;"	m
+GORUN	Makefile	/^GORUN=$(GOBIN) run$/;"	m
+GOTEST	Makefile	/^GOTEST=$(GOBIN) test$/;"	m
+HotPort	internal/rpc/hotport.go	/^type HotPort int$/;"	d
+HotPort	internal/rpc/hotport.go	/^type HotPort int$/;"	t
+HotPortHandler	internal/background/background.go	/^func HotPortHandler(args ...interface{}) {$/;"	d
+HotPortHandler	internal/background/background.go	/^func HotPortHandler(args ...interface{}) {$/;"	f
+HotRing	internal/rpc/init.go	/^var HotRing *ring.Ring$/;"	d
+HotRing	internal/rpc/init.go	/^var HotRing *ring.Ring$/;"	v
+HotRingSize	internal/rpc/init.go	/^var HotRingSize int$/;"	d
+HotRingSize	internal/rpc/init.go	/^var HotRingSize int$/;"	v
+Init	internal/rpc/initport.go	/^type Init int$/;"	d
+Init	internal/rpc/initport.go	/^type Init int$/;"	t
+InitFlag	internal/rpc/init.go	/^var InitFlag int$/;"	d
+InitFlag	internal/rpc/init.go	/^var InitFlag int$/;"	v
+LogFile	pkg/rpc/type.go	/^type LogFile struct {$/;"	d
+LogFile	pkg/rpc/type.go	/^type LogFile struct {$/;"	t
+LogInfo	pkg/rpc/type.go	/^type LogInfo struct {$/;"	d
+LogInfo	pkg/rpc/type.go	/^type LogInfo struct {$/;"	t
+LogMessage	pkg/rpc/type.go	/^type LogMessage struct {$/;"	d
+LogMessage	pkg/rpc/type.go	/^type LogMessage struct {$/;"	t
+MapTable	internal/rpc/init.go	/^var MapTable map[string][]string$/;"	d
+MapTable	internal/rpc/init.go	/^var MapTable map[string][]string$/;"	v
+MergeMap	internal/background/filter.go	/^func MergeMap(a map[string][]string, b map[string][]string) map[string][]string {$/;"	d
+MergeMap	internal/background/filter.go	/^func MergeMap(a map[string][]string, b map[string][]string) map[string][]string {$/;"	f
+New	pkg/container/ring/ring.go	/^func New(capacity ...int) *Ring {$/;"	d
+New	pkg/container/ring/ring.go	/^func New(capacity ...int) *Ring {$/;"	f
+New	pkg/server/server.go	/^func New(ctx context.Context) *Server {$/;"	d
+New	pkg/server/server.go	/^func New(ctx context.Context) *Server {$/;"	f
+Pop	pkg/container/ring/ring.go	/^func (t *Ring) Pop() (interface{}, error) {$/;"	d
+Pop	pkg/container/ring/ring.go	/^func (t *Ring) Pop() (interface{}, error) {$/;"	f
+Push	internal/rpc/coldport.go	/^func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {$/;"	d
+Push	internal/rpc/coldport.go	/^func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {$/;"	f
+Push	internal/rpc/hotport.go	/^func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {$/;"	d
+Push	internal/rpc/hotport.go	/^func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {$/;"	f
+Push	internal/rpc/initport.go	/^func (t *Init) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {$/;"	d
+Push	internal/rpc/initport.go	/^func (t *Init) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {$/;"	f
+Push	pkg/container/ring/ring.go	/^func (t *Ring) Push(args interface{}) error {$/;"	d
+Push	pkg/container/ring/ring.go	/^func (t *Ring) Push(args interface{}) error {$/;"	f
+Push	pkg/server/server.go	/^func (t *Server) Push(key string, data string) error {$/;"	d
+Push	pkg/server/server.go	/^func (t *Server) Push(key string, data string) error {$/;"	f
+RangeMapping	internal/util/utility.go	/^func RangeMapping(arg int, ringSize int) uint8 {$/;"	d
+RangeMapping	internal/util/utility.go	/^func RangeMapping(arg int, ringSize int) uint8 {$/;"	f
+RedisServer	internal/global/global.go	/^var RedisServer *server.Server$/;"	d
+RedisServer	internal/global/global.go	/^var RedisServer *server.Server$/;"	v
+Reply	pkg/rpc/type.go	/^type Reply struct {$/;"	d
+Reply	pkg/rpc/type.go	/^type Reply struct {$/;"	t
+Ring	pkg/container/ring/ring.go	/^type Ring struct {$/;"	d
+Ring	pkg/container/ring/ring.go	/^type Ring struct {$/;"	t
+SendMessage	internal/background/background.go	/^func SendMessage(idx string, data string, isHot bool) error {$/;"	d
+SendMessage	internal/background/background.go	/^func SendMessage(idx string, data string, isHot bool) error {$/;"	f
+Server	pkg/server/server.go	/^type Server struct {$/;"	d
+Server	pkg/server/server.go	/^type Server struct {$/;"	t
+Size	pkg/container/ring/ring.go	/^func (t *Ring) Size() int {$/;"	d
+Size	pkg/container/ring/ring.go	/^func (t *Ring) Size() int {$/;"	f
+SoyLogExplorer	internal/rpc/init.go	/^var SoyLogExplorer client.XClient$/;"	d
+SoyLogExplorer	internal/rpc/init.go	/^var SoyLogExplorer client.XClient$/;"	v
+TestColdPortHandler	internal/background/background_test.go	/^func TestColdPortHandler(t *testing.T) {$/;"	d
+TestColdPortHandler	internal/background/background_test.go	/^func TestColdPortHandler(t *testing.T) {$/;"	f
+TestColdPush	internal/rpc/rpc_test.go	/^func TestColdPush(t *testing.T) {$/;"	d
+TestColdPush	internal/rpc/rpc_test.go	/^func TestColdPush(t *testing.T) {$/;"	f
+TestHotPortHandler	internal/background/background_test.go	/^func TestHotPortHandler(t *testing.T) {$/;"	d
+TestHotPortHandler	internal/background/background_test.go	/^func TestHotPortHandler(t *testing.T) {$/;"	f
+TestHotPush	internal/rpc/rpc_test.go	/^func TestHotPush(t *testing.T) {$/;"	d
+TestHotPush	internal/rpc/rpc_test.go	/^func TestHotPush(t *testing.T) {$/;"	f
+TestInit	internal/global/global_test.go	/^func TestInit(t *testing.T) {$/;"	d
+TestInit	internal/global/global_test.go	/^func TestInit(t *testing.T) {$/;"	f
+TestNew	pkg/container/ring/ring_test.go	/^func TestNew(t *testing.T) {$/;"	d
+TestNew	pkg/container/ring/ring_test.go	/^func TestNew(t *testing.T) {$/;"	f
+TestNew	pkg/server/server_test.go	/^func TestNew(t *testing.T) {$/;"	d
+TestNew	pkg/server/server_test.go	/^func TestNew(t *testing.T) {$/;"	f
+TestPop	pkg/container/ring/ring_test.go	/^func TestPop(t *testing.T) {$/;"	d
+TestPop	pkg/container/ring/ring_test.go	/^func TestPop(t *testing.T) {$/;"	f
+TestPush	pkg/container/ring/ring_test.go	/^func TestPush(t *testing.T) {$/;"	d
+TestPush	pkg/container/ring/ring_test.go	/^func TestPush(t *testing.T) {$/;"	f
+TestPush	pkg/server/server_test.go	/^func TestPush(t *testing.T) {$/;"	d
+TestPush	pkg/server/server_test.go	/^func TestPush(t *testing.T) {$/;"	f
+TestRangeMapping	internal/util/utility_test.go	/^func TestRangeMapping(t *testing.T) {$/;"	d
+TestRangeMapping	internal/util/utility_test.go	/^func TestRangeMapping(t *testing.T) {$/;"	f
+TestSize	pkg/container/ring/ring_test.go	/^func TestSize(t *testing.T) {$/;"	d
+TestSize	pkg/container/ring/ring_test.go	/^func TestSize(t *testing.T) {$/;"	f
+TestTimeSlice	internal/util/utility_test.go	/^func TestTimeSlice(t *testing.T) {$/;"	d
+TestTimeSlice	internal/util/utility_test.go	/^func TestTimeSlice(t *testing.T) {$/;"	f
+TimeSlice	internal/util/utility.go	/^func TimeSlice(arg int64) string {$/;"	d
+TimeSlice	internal/util/utility.go	/^func TimeSlice(arg int64) string {$/;"	f
+addr	client.go	/^var addr = flag.String("addr", "164.125.68.227:8972", "server address")$/;"	d
+addr	client.go	/^var addr = flag.String("addr", "164.125.68.227:8972", "server address")$/;"	v
+addr	cmd/client/client.go	/^var addr = flag.String("addr1", rpcserver, "server address")$/;"	d
+addr	cmd/client/client.go	/^var addr = flag.String("addr1", rpcserver, "server address")$/;"	v
+addr	cmd/server/server.go	/^var addr = flag.String("rpcaddr", rpcserver, "server address")$/;"	d
+addr	cmd/server/server.go	/^var addr = flag.String("rpcaddr", rpcserver, "server address")$/;"	v
+background	internal/background/background.go	/^package background$/;"	p
+background	internal/background/background_test.go	/^package background$/;"	p
+background	internal/background/filter.go	/^package background$/;"	p
+buf	client.go	/^	var buf bytes.Buffer$/;"	d
+buf	internal/background/background.go	/^	var buf *rpc.LogMessage$/;"	d
+buf	internal/background/background.go	/^	var buf bytes.Buffer$/;"	d
+checkAvailable	internal/rpc/util.go	/^func checkAvailable(hotcold int) error {$/;"	d
+checkAvailable	internal/rpc/util.go	/^func checkAvailable(hotcold int) error {$/;"	f
+checkInit	internal/rpc/util.go	/^func checkInit() error {$/;"	d
+checkInit	internal/rpc/util.go	/^func checkInit() error {$/;"	f
+checkRingSize	internal/rpc/util.go	/^func checkRingSize(hotcold int) error {$/;"	d
+checkRingSize	internal/rpc/util.go	/^func checkRingSize(hotcold int) error {$/;"	f
+coldport	internal/rpc/rpc_test.go	/^	var coldport ColdPort$/;"	d
+compressed	internal/background/background.go	/^	var compressed []byte$/;"	d
+connectionCount	internal/background/background.go	/^	var connectionCount int$/;"	d
+ctx	internal/global/global.go	/^var ctx context.Context$/;"	d
+ctx	internal/global/global.go	/^var ctx context.Context$/;"	v
+data	internal/background/background.go	/^\/\/ SendMessage send esdocs type data to soy_log_explorer$/;"	d
+docs	internal/background/background.go	/^	var docs esdocs.ESdocs$/;"	d
+docsCompress	internal/background/background.go	/^func docsCompress(docs esdocs.ESdocs) ([]byte, error) {$/;"	d
+docsCompress	internal/background/background.go	/^func docsCompress(docs esdocs.ESdocs) ([]byte, error) {$/;"	f
+download	get.sh	/^download() {$/;"	f
+download	scripts/get.sh	/^download() {$/;"	f
+download_reporter	get.sh	/^download_reporter() {$/;"	f
+download_reporter	scripts/get.sh	/^download_reporter() {$/;"	f
+err	internal/background/background.go	/^	var err error$/;"	d
+err	internal/background/background_test.go	/^	var err error$/;"	d
+err	internal/rpc/rpc_test.go	/^	var err error$/;"	d
+err	pkg/container/ring/ring_test.go	/^	var err error$/;"	d
+esdocs	client.go	/^type esdocs struct {$/;"	d
+esdocs	client.go	/^type esdocs struct {$/;"	t
+exit_trap	get.sh	/^exit_trap() {$/;"	f
+exit_trap	scripts/get.sh	/^exit_trap() {$/;"	f
+fatal	get.sh	/^fatal() {$/;"	f
+fatal	scripts/get.sh	/^fatal() {$/;"	f
+files	internal/rpc/copy.go	/^	var files rpc.LogFile$/;"	d
+filter	internal/background/filter.go	/^	var filter []string$/;"	d
+global	internal/global/global.go	/^package global$/;"	p
+global	internal/global/global_test.go	/^package global$/;"	p
+greetings	get.sh	/^greetings() {$/;"	f
+greetings	scripts/get.sh	/^greetings() {$/;"	f
+handler	internal/background/background.go	/^func handler(arg *rpc.LogMessage, isHot bool) {$/;"	d
+handler	internal/background/background.go	/^func handler(arg *rpc.LogMessage, isHot bool) {$/;"	f
+hotport	internal/rpc/rpc_test.go	/^	var hotport HotPort$/;"	d
+init	internal/global/global.go	/^func init() {$/;"	d
+init	internal/global/global.go	/^func init() {$/;"	f
+init	internal/rpc/init.go	/^func init() {$/;"	d
+init	internal/rpc/init.go	/^func init() {$/;"	f
+log	get.sh	/^log() {$/;"	f
+log	scripts/get.sh	/^log() {$/;"	f
+logmsg	cmd/client/client.go	/^	var logmsg rpc.LogMessage$/;"	d
+logmsg	internal/background/background_test.go	/^	var logmsg rpc.LogMessage$/;"	d
+logmsg	internal/rpc/rpc_test.go	/^	var logmsg rpc.LogMessage$/;"	d
+main	client.go	/^func main() {$/;"	d
+main	client.go	/^func main() {$/;"	f
+main	client.go	/^package main$/;"	p
+main	cmd/client/client.go	/^func main() {$/;"	d
+main	cmd/client/client.go	/^func main() {$/;"	f
+main	cmd/client/client.go	/^package main$/;"	p
+main	cmd/server/server.go	/^func main() {$/;"	d
+main	cmd/server/server.go	/^func main() {$/;"	f
+main	cmd/server/server.go	/^package main$/;"	p
+makeJSON	internal/background/background.go	/^func makeJSON(timestamp string, filename string, log string, host string) map[string]string {$/;"	d
+makeJSON	internal/background/background.go	/^func makeJSON(timestamp string, filename string, log string, host string) map[string]string {$/;"	f
+makeMsg	internal/background/background_test.go	/^func makeMsg(hotcold bool) rpc.LogMessage {$/;"	d
+makeMsg	internal/background/background_test.go	/^func makeMsg(hotcold bool) rpc.LogMessage {$/;"	f
+makeMsg	internal/rpc/rpc_test.go	/^func makeMsg(hotcold bool) rpc.LogMessage {$/;"	d
+makeMsg	internal/rpc/rpc_test.go	/^func makeMsg(hotcold bool) rpc.LogMessage {$/;"	f
+msg	internal/background/background_test.go	/^	var msg string$/;"	d
+msg	internal/rpc/rpc_test.go	/^	var msg string$/;"	d
+newClient	pkg/server/server.go	/^func (t *Server) newClient(dbnum int) redis.Client {$/;"	d
+newClient	pkg/server/server.go	/^func (t *Server) newClient(dbnum int) redis.Client {$/;"	f
+reply	client.go	/^	var reply string$/;"	d
+reply	cmd/client/client.go	/^	var reply rpc.Reply$/;"	d
+reply	internal/background/background.go	/^	var reply string$/;"	d
+reply	internal/rpc/rpc_test.go	/^	var reply rpc.Reply$/;"	d
+ring	pkg/container/ring/ring.go	/^package ring$/;"	p
+ring	pkg/container/ring/ring_test.go	/^package ring$/;"	p
+rpc	internal/rpc/coldport.go	/^package rpc$/;"	p
+rpc	internal/rpc/copy.go	/^package rpc$/;"	p
+rpc	internal/rpc/explorer_server.go	/^package rpc$/;"	p
+rpc	internal/rpc/hotport.go	/^package rpc$/;"	p
+rpc	internal/rpc/init.go	/^package rpc$/;"	p
+rpc	internal/rpc/initport.go	/^package rpc$/;"	p
+rpc	internal/rpc/rpc_test.go	/^package rpc$/;"	p
+rpc	internal/rpc/util.go	/^package rpc$/;"	p
+rpc	pkg/rpc/type.go	/^package rpc$/;"	p
+rpcserver	cmd/client/client.go	/^var rpcserver = os.Getenv("RPCSERVER")$/;"	d
+rpcserver	cmd/client/client.go	/^var rpcserver = os.Getenv("RPCSERVER")$/;"	v
+rpcserver	cmd/server/server.go	/^var rpcserver = os.Getenv("RPCSERVER")$/;"	d
+rpcserver	cmd/server/server.go	/^var rpcserver = os.Getenv("RPCSERVER")$/;"	v
+server	pkg/server/server.go	/^package server$/;"	p
+server	pkg/server/server_test.go	/^package server$/;"	p
+setMapTable	internal/background/background_test.go	/^func setMapTable() {$/;"	d
+setMapTable	internal/background/background_test.go	/^func setMapTable() {$/;"	f
+setMapTable	internal/rpc/rpc_test.go	/^func setMapTable() {$/;"	d
+setMapTable	internal/rpc/rpc_test.go	/^func setMapTable() {$/;"	f
+table	internal/background/background_test.go	/^	var table []string$/;"	d
+table	internal/rpc/rpc_test.go	/^	var table []string$/;"	d
+util	internal/util/utility.go	/^package util$/;"	p
+util	internal/util/utility_test.go	/^package util$/;"	p
+with	pkg/rpc/type.go	/^\/\/ LogMessage is rpc parameter type with soy_log_generator.$/;"	d

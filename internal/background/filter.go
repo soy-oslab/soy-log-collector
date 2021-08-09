@@ -8,19 +8,6 @@ import (
 	"regexp"
 )
 
-// MergeMap returns map concatenated two maps.
-func MergeMap(a map[string][]string, b map[string][]string) map[string][]string {
-	for k, v := range b {
-		if _, ok := a[k]; ok {
-			a[k] = append(a[k], v...)
-		} else {
-			a[k] = v
-		}
-	}
-
-	return a
-}
-
 // Filter rerturn map[string][]string
 // Read from local filter file.
 // Search log with filterword based filter.

@@ -11,12 +11,14 @@ import (
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
-func setMapTable() {
+func setMapTable() []string {
 	var table []string
 
 	table = append(table, "File1")
 	table = append(table, "File2")
 	MapTable["TestModule:test"] = table
+
+	return table
 }
 
 func makeMsg(hotcold bool) rpc.LogMessage {
@@ -45,6 +47,19 @@ func makeMsg(hotcold bool) rpc.LogMessage {
 	}
 
 	return logmsg
+}
+
+func TestInitPush(t *testing.T) {
+	var logmsg rpc.LogMessage
+	var reply rpc.Reply
+	var initport Init
+
+	ctx := context.Background()
+
+	logmsg.Namespace = "app1"
+	logmsg.Files.MapTable = setMapTable()
+
+	initport.Push(ctx, &logmsg, &reply)
 }
 
 func TestHotPush(t *testing.T) {

@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
@@ -17,6 +18,7 @@ type ColdPort int
 // Send current ColdPort utility with reply
 func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
 	err := checkAvailable(0)
+	fmt.Println("Receive-Cold: ", args)
 	if err != nil {
 		reply.Rate = util.RangeMapping(ColdRing.Size(), ColdRingSize)
 		return err

@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
@@ -18,6 +19,7 @@ type HotPort int
 // Send current HotPort utility with reply
 func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply) error {
 	err := checkAvailable(1)
+	fmt.Println("Receive-Hot: ", args)
 	if err != nil {
 		reply.Rate = util.RangeMapping(HotRing.Size(), HotRingSize)
 		return err

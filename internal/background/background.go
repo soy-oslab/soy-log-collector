@@ -6,6 +6,7 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 
 	decoder "github.com/mitchellh/mapstructure"
@@ -79,7 +80,7 @@ SEND:
 		}
 		goto SEND
 	}
-
+	fmt.Println("Send-", isHot, ": ", docs)
 	return nil
 }
 

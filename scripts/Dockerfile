@@ -9,11 +9,10 @@ RUN apt-get -qy \
 	apt-get -qy autoclean && \
 	apt-get -y update && \
 	apt-get -y install redis-server && \
-	service redis-server restart
 	
 
 WORKDIR /go/collector
 
 RUN go build -v ./...
 
-CMD ["bash"]
+CMD service redis-server restart; go run cmd/server/server.go

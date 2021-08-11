@@ -39,3 +39,5 @@ jobs:
         EXPLORERSERVER: ${{ secrets.EXPLORERSERVER }}
         RPCSERVER: ${{ secrets.RPCSERVER }}
         DBADDR: ${{ secrets.DBADDR }}
+        HOTPORTSIZE: ${{ secrets.HOTPORTSIZE }}
+        COLDPORTSIZE: ${{ secrets.COLDPORTSIZE }}

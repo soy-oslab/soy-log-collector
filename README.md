@@ -28,6 +28,8 @@ Set enviroment variables:
 $ export RPCSERVER=0.0.0.0:YYYY			# Server Address
 $ export EXPLORERSERVER=X.X.X.X:YYYY    # soy_log_explorer's RPC server Address
 $ export DBADDR=X.X.X.X:YYYY			# Redis-server's Address
+$ export HOTPORTSIZE=X					# HotPort Ring Size
+$ export COLDPORTSIZE=X					# ColdPort Ring Size
 ```
 
 Example:
@@ -35,6 +37,8 @@ Example:
 RPCSERVER=0.0.0.0:8972
 EXPLORERSERVER=localhost:8973
 DBADDR=localhost:6379
+HOTPORT=1000
+COLDPORT=1000000
 ```
 
 Run soy_log_collector:

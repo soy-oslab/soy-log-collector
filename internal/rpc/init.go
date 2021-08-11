@@ -3,6 +3,7 @@ package rpc
 import (
 	"flag"
 	"os"
+	"strconv"
 
 	"github.com/smallnest/rpcx/client"
 	"github.com/soyoslab/soy_log_collector/pkg/container/ring"
@@ -38,8 +39,8 @@ var ExplorerServer string
 var ExplorerAddr *string
 
 func init() {
-	HotRingSize = 10
-	ColdRingSize = 10
+	HotRingSize, _ = strconv.Atoi(os.Getenv("HOTPORTSIZE"))
+	ColdRingSize, _ = strconv.Atoi(os.Getenv("COLDPORTSIZE"))
 
 	MapTable = make(map[string][]string)
 	HotRing = ring.New(HotRingSize)

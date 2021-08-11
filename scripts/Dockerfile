@@ -1,7 +1,9 @@
 FROM golang:1.16
 
-COPY collector collector
+ENV HOTPORTSIZE=1000 \
+	COLDPORTSIZE=1000000
 
+COPY collector collector
 
 RUN apt-get -qy \
 	-o "Dpkg::Options::=--force-confdef" \

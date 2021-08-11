@@ -30,6 +30,8 @@ jobs:
         EXPLORERSERVER: ${{ secrets.EXPLORERSERVER }}
         RPCSERVER: ${{ secrets.RPCSERVER }}
         DBADDR: ${{ secrets.DBADDR }}
+        HOTPORTSIZE: ${{ secrets.HOTPORTSIZE }}
+        COLDPORTSIZE: ${{ secrets.COLDPORTSIZE }}
     - name: Send coverage
       run: make codacy-coverage-push
       env:

@@ -25,11 +25,11 @@ $ cd soy_log_collector
 
 Set enviroment variables:
 ```bash
-export RPCSERVER=0.0.0.0:YYYY			    # Server Address
+export RPCSERVER=0.0.0.0:YYYY         # Server Address
 export EXPLORERSERVER=X.X.X.X:YYYY    # soy_log_explorer's RPC server Address
-export DBADDR=X.X.X.X:YYYY			      # Redis-server's Address
-export HOTPORTSIZE=X					        # HotPort Ring Size
-export COLDPORTSIZE=X					        # ColdPort Ring Size
+export DBADDR=X.X.X.X:YYYY            # Redis-server's Address
+export HOTPORTSIZE=X                  # HotPort Ring Size
+export COLDPORTSIZE=X                 # ColdPort Ring Size
 ```
 
 Example:

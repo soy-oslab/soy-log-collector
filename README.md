@@ -25,20 +25,20 @@ $ cd soy_log_collector
 
 Set enviroment variables:
 ```bash
-$ export RPCSERVER=0.0.0.0:YYYY			# Server Address
-$ export EXPLORERSERVER=X.X.X.X:YYYY    # soy_log_explorer's RPC server Address
-$ export DBADDR=X.X.X.X:YYYY			# Redis-server's Address
-$ export HOTPORTSIZE=X					# HotPort Ring Size
-$ export COLDPORTSIZE=X					# ColdPort Ring Size
+$ export RPCSERVER=0.0.0.0:YYYY      # Server Address
+$ export EXPLORERSERVER=X.X.X.X:YYYY # soy_log_explorer's RPC server Address
+$ export DBADDR=X.X.X.X:YYYY         # Redis-server's Address
+$ export HOTPORTSIZE=X               # HotPort Ring Size
+$ export COLDPORTSIZE=X              # ColdPort Ring Size
 ```
 
 Example:
 ```
-RPCSERVER=0.0.0.0:8972
-EXPLORERSERVER=localhost:8973
-DBADDR=localhost:6379
-HOTPORT=1000
-COLDPORT=1000000
+export RPCSERVER=0.0.0.0:8972
+export EXPLORERSERVER=localhost:8973
+export DBADDR=localhost:6379
+export HOTPORT=1000
+export COLDPORT=1000000
 ```
 
 Run soy_log_collector:

@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/soyoslab/soy_log_collector/internal/global"
-	irpc "github.com/soyoslab/soy_log_collector/internal/rpc"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
@@ -16,7 +15,7 @@ func setMapTable() {
 	var table []string
 	table = append(table, "File1")
 	table = append(table, "File2")
-	irpc.MapTable["TestModule:test"] = table
+	global.MapTable["TestModule:test"] = table
 }
 
 func makeMsg(hotcold bool) rpc.LogMessage {

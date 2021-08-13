@@ -11,7 +11,6 @@ import (
 
 	decoder "github.com/mitchellh/mapstructure"
 	"github.com/soyoslab/soy_log_collector/internal/global"
-	irpc "github.com/soyoslab/soy_log_collector/internal/rpc"
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
@@ -28,7 +27,7 @@ func HotPortHandler(args ...interface{}) {
 		panic(err)
 	}
 
-	handler(buf, true)
+	Handler(buf, true)
 }
 
 func docsCompress(docs esdocs.ESdocs) ([]byte, error) {
@@ -66,16 +65,16 @@ SEND:
 		if strings.Contains(err.Error(), "full") {
 			for err != nil {
 				if isHot {
-					err = irpc.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
+					err = global.SoyLogExplorer.Call(context.Background(), "HotPush", &docs, &reply)
 				} else {
-					err = irpc.SoyLogExplorer.Call(context.Background(), "ColdPush", &compressed, &reply)
+					err = global.SoyLogExplorer.Call(context.Background(), "ColdPush", &compressed, &reply)
 				}
 			}
 		} else {
 			if connectionCount > 10 {
 				return errors.New("connection fail")
 			}
-			irpc.SoyLogExplorer = irpc.CreateExplorerServer()
+			global.SoyLogExplorer = global.CreateExplorerServer()
 			connectionCount++
 		}
 		goto SEND
@@ -97,7 +96,7 @@ func ColdPortHandler(args ...interface{}) {
 	}
 	buf.Buffer = buffer
 
-	handler(buf, false)
+	Handler(buf, false)
 }
 
 func makeJSON(timestamp string, filename string, log string, host string) map[string]string {
@@ -111,7 +110,8 @@ func makeJSON(timestamp string, filename string, log string, host string) map[st
 	return buf
 }
 
-func handler(arg *rpc.LogMessage, isHot bool) {
+// Handler RPC Port Handler
+func Handler(arg *rpc.LogMessage, isHot bool) {
 	var (
 		idx                            int
 		err                            error
@@ -133,7 +133,7 @@ func handler(arg *rpc.LogMessage, isHot bool) {
 	for i, loginfo := range arg.Info {
 		length = int(loginfo.Length)
 		timestamp = loginfo.Timestamp
-		filename = irpc.MapTable[arg.Namespace][arg.Files.Indexes[i]]
+		filename = global.MapTable[arg.Namespace][arg.Files.Indexes[i]]
 		log = string(arg.Buffer[idx : idx+length])
 		ts := util.TimeSlice(timestamp)
 		if err != nil {
@@ -147,6 +147,10 @@ func handler(arg *rpc.LogMessage, isHot bool) {
 		idx += length
 		if isHot {
 			logarr = logarr[:0]
+			err := Filter(log)
+			if err != nil {
+				continue
+			}
 			logarr = append(logarr, makeJSON(ts, filename, log, host))
 			jsonfy, _ := json.Marshal(logarr)
 			SendMessage(namespace, string(jsonfy), isHot)

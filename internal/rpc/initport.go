@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	"github.com/soyoslab/soy_log_collector/internal/global"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
 )
 
@@ -20,7 +21,7 @@ func (t *Init) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Reply)
 		reply.Rate = 0
 		return errors.New("no maptables")
 	}
-	MapTable[args.Namespace] = args.Files.MapTable
+	global.MapTable[args.Namespace] = args.Files.MapTable
 	InitFlag = 1
 	return nil
 }

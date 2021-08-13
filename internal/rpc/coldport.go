@@ -6,6 +6,7 @@ import (
 
 	"github.com/soyoslab/soy_log_collector/internal/util"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
+	"github.com/soyoslab/soy_log_explorer/pkg/signal"
 )
 
 // ColdPort is rpc procedure type.
@@ -26,6 +27,7 @@ func (t *ColdPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Re
 
 	log := CopyLogMessage(args)
 	ColdRing.Push(&log)
+	signal.Signal()
 	reply.Rate = util.RangeMapping(ColdRing.Size(), ColdRingSize)
 	return nil
 }

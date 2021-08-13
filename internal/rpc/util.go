@@ -19,11 +19,7 @@ func checkAvailable(hotcold int) error {
 }
 
 func checkRingSize(hotcold int) error {
-	if hotcold == 1 {
-		if HotRing.Size() >= HotRingSize {
-			return errors.New("hotport is full")
-		}
-	} else {
+	if hotcold == 0 {
 		if ColdRing.Size() >= ColdRingSize {
 			return errors.New("coldport is full")
 		}

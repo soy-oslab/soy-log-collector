@@ -1,4 +1,4 @@
-package rpc
+package global
 
 import (
 	"github.com/smallnest/rpcx/client"

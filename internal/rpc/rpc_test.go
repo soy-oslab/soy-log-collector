@@ -16,7 +16,7 @@ func setMapTable() []string {
 
 	table = append(table, "File1")
 	table = append(table, "File2")
-	MapTable["TestModule:test"] = table
+	global.MapTable["TestModule:test"] = table
 
 	return table
 }

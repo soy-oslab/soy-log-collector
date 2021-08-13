@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/soyoslab/soy_log_collector/internal/util"
+	"github.com/soyoslab/soy_log_collector/internal/background"
 	"github.com/soyoslab/soy_log_collector/pkg/rpc"
-	"github.com/soyoslab/soy_log_explorer/pkg/signal"
 )
 
 // HotPort is rpc procedure type.
@@ -21,13 +20,10 @@ func (t *HotPort) Push(ctx context.Context, args *rpc.LogMessage, reply *rpc.Rep
 	err := checkAvailable(1)
 	fmt.Println("Receive-Hot: ", args)
 	if err != nil {
-		reply.Rate = util.RangeMapping(HotRing.Size(), HotRingSize)
 		return err
 	}
 
 	log := CopyLogMessage(args)
-	HotRing.Push(&log)
-	signal.Signal()
-	reply.Rate = util.RangeMapping(HotRing.Size(), HotRingSize)
+	go background.Handler(&log, true)
 	return nil
 }

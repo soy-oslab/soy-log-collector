@@ -18,8 +18,7 @@ var addr = flag.String("rpcaddr", rpcserver, "server address")
 // Server run rpcx server
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	go daemon.Listen(rpc.HotRing, bg.HotPortHandler, 0)
-	go daemon.Listen(rpc.ColdRing, bg.ColdPortHandler, 20)
+	go daemon.Listen(rpc.ColdRing, bg.ColdPortHandler, 0)
 
 	s := server.NewServer()
 	err := s.RegisterName("HotPort", new(rpc.HotPort), "")

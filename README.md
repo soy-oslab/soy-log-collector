@@ -17,8 +17,8 @@ The internal process is below.
 ## Installation
 
 ```bash
-$ git clone https://github.com/soyoslab/soy_log_collector.git
-$ cd soy_log_collector
+git clone https://github.com/soyoslab/soy_log_collector.git
+cd soy_log_collector
 ```
 
 ## Usage
@@ -43,5 +43,5 @@ export COLDPORTSIZE=1000000
 
 Run soy_log_collector:
 ```bash
-$ go run cmd/server/server.go
+go run cmd/server/server.go
 ```

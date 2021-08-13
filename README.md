@@ -17,19 +17,19 @@ The internal process is below.
 ## Installation
 
 ```bash
-$ git clone https://github.com/soyoslab/soy_log_collector.git
-$ cd soy_log_collector
+git clone https://github.com/soyoslab/soy_log_collector.git
+cd soy_log_collector
 ```
 
 ## Usage
 
 Set enviroment variables:
 ```bash
-$ export RPCSERVER=0.0.0.0:YYYY      # Server Address
-$ export EXPLORERSERVER=X.X.X.X:YYYY # soy_log_explorer's RPC server Address
-$ export DBADDR=X.X.X.X:YYYY         # Redis-server's Address
-$ export HOTPORTSIZE=X               # HotPort Ring Size
-$ export COLDPORTSIZE=X              # ColdPort Ring Size
+export RPCSERVER=0.0.0.0:YYYY         # Server Address
+export EXPLORERSERVER=X.X.X.X:YYYY    # soy_log_explorer's RPC server Address
+export DBADDR=X.X.X.X:YYYY            # Redis-server's Address
+export HOTPORTSIZE=X                  # HotPort Ring Size
+export COLDPORTSIZE=X                 # ColdPort Ring Size
 ```
 
 Example:
@@ -37,11 +37,11 @@ Example:
 export RPCSERVER=0.0.0.0:8972
 export EXPLORERSERVER=localhost:8973
 export DBADDR=localhost:6379
-export HOTPORT=1000
-export COLDPORT=1000000
+export HOTPORTSIZE=1000
+export COLDPORTSIZE=1000000
 ```
 
 Run soy_log_collector:
 ```bash
-$ go run cmd/server/server.go
+go run cmd/server/server.go
 ```

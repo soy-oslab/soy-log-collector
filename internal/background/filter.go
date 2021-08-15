@@ -22,7 +22,7 @@ func Filter(log string) error {
 
 	if err != nil {
 		filter = make([]string, 1)
-		filter[0] = "kijunking"
+		filter[0] = ".*"
 	} else {
 		byteValue, _ := ioutil.ReadAll(f)
 		json.Unmarshal(byteValue, &filter)
